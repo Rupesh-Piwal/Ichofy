@@ -99,18 +99,6 @@ We welcome contributions! Here's how you can help:
 
 ---
 
-## 📋 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-## 👨‍💻 Contributors
-
-We appreciate everyone who has contributed to Museek! Feel free to add your name to the contributors' list when you make a meaningful contribution.
-
----
-
 ### Connect With Us
 
 For any questions or feedback, please feel free to reach out at [📧rpiwal02@gmail.com](mailto:rpiwal02@gmail.com).

@@ -17,8 +17,8 @@ const __dirname = path.resolve();
 const app = express();
 const PORT = process.env.PORT || 5002;
 
-app.use(express.json()); // to parse req.body
-app.use(clerkMiddleware()); // this will add auth to req obj => req.auth.userId
+app.use(express.json()); 
+app.use(clerkMiddleware()); 
 
 app.use(
   fileUpload({

@@ -10,7 +10,7 @@ import { protectRoute, requireAdmin } from "../middleware/auth.middleware.js";
 
 const router = Router();
 
-router.use(protectRoute, requireAdmin); // uses middleware in below all the routes.
+router.use(protectRoute, requireAdmin); 
 
 router.get("/check", checkAdmin);
 

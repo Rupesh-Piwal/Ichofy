@@ -58,7 +58,6 @@ const deleteSong = async (req, res, next) => {
 
     const song = await Song.findById(id);
 
-    // if song belongs to an album, update the album's songs array
     if (song.albumId) {
       await Album.findByIdAndUpdate(song.albumId, {
         $pull: { songs: song._id },

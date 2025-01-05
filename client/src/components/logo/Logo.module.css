@@ -1,0 +1,89 @@
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 35px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #b5179e, #7209b7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.iText {
+  font-family: "Arial", sans-serif;
+  font-style: italic;
+  margin-right: 5px;
+}
+
+.chofyText {
+  font-family: "Helvetica", sans-serif;
+  font-weight: 300;
+  letter-spacing: -2px;
+}
+
+.musicBar {
+  display: flex;
+  align-items: flex-end;
+  margin-left: 15px;
+}
+
+.bar {
+  width: 2px;
+  background: linear-gradient(to top, #b5179e, #7209b7);
+  border-radius: 2px;
+  margin: 0 2px;
+  animation: equalizer 1.5s infinite ease-in-out;
+}
+
+.bar1 {
+  height: 10px;
+  animation-delay: 0s;
+}
+.bar2 {
+  height: 15px;
+  animation-delay: 0.2s;
+}
+.bar3 {
+  height: 25px;
+  animation-delay: 0.4s;
+}
+.bar4 {
+  height: 15px;
+  animation-delay: 0.6s;
+}
+.bar5 {
+  height: 10px;
+  animation-delay: 0.8s;
+}
+
+@keyframes equalizer {
+  0%,
+  100% {
+    transform: scaleY(0.8);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 24px;
+  }
+  .musicBar {
+    height: 25px;
+    margin-left: 10px;
+  }
+  .bar {
+    width: 2px;
+    margin: 0 2px;
+  }
+}

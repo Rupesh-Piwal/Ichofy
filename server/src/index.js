@@ -10,6 +10,7 @@ import authRoutes from "./routes/auth.route.js";
 import songRoutes from "./routes/song.route.js";
 import statRoutes from "./routes/stat.route.js";
 import { connectDB } from "./lib/db.js";
+import cors from "cors";
 
 dotenv.config();
 
@@ -17,8 +18,15 @@ const __dirname = path.resolve();
 const app = express();
 const PORT = process.env.PORT || 5002;
 
-app.use(express.json()); 
-app.use(clerkMiddleware()); 
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+
+app.use(express.json());
+app.use(clerkMiddleware());
 
 app.use(
   fileUpload({

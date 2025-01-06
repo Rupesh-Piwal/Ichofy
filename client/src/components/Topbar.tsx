@@ -13,7 +13,7 @@ const Topbar = () => {
 
   return (
     <div
-      className="flex items-center justify-between p-3 stickytop-0 bg-zinc-900/75 
+      className="flex items-center justify-between p-3 stickytop-0 bg-black
       backdrop-blur-md z-10
     "
     >

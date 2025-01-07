@@ -5,6 +5,7 @@ import { useMusicStore } from "@/stores/useMusicStore";
 import { Clock, Pause, Play } from "lucide-react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export const formatDuration = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
@@ -15,7 +16,7 @@ export const formatDuration = (seconds: number) => {
 const AlbumPage = () => {
   const { albumId } = useParams();
   const { fetchAlbumById, currentAlbum, isLoading } = useMusicStore();
-  //   const { currentSong, isPlaying, playAlbum, togglePlay } = usePlayerStore();
+  // const { currentSong, isPlaying, playAlbum, togglePlay } = usePlayerStore();
 
   useEffect(() => {
     if (albumId) fetchAlbumById(albumId);
@@ -30,7 +31,7 @@ const AlbumPage = () => {
         <div className="relative min-h-full">
           {/* bg gradient */}
           <div
-            className="absolute inset-0 bg-gradient-to-b from-[#5038a0]/80 via-zinc-900/80
+            className="absolute inset-0 bg-gradient-to-b from-[#B5179E]/30 via-[#7209B7]/10
 					 to-zinc-900 pointer-events-none"
             aria-hidden="true"
           />
@@ -61,11 +62,12 @@ const AlbumPage = () => {
             {/* play button */}
             <div className="px-6 pb-4 flex items-center gap-6">
               <Button
+                // onClick={handlePlayAlbum}
                 size="icon"
                 className="w-14 h-14 rounded-full bg-green-500 hover:bg-green-400 
                 hover:scale-105 transition-all"
               >
-                <Play className="h-7 w-7 text-black" />
+                <Pause className="h-7 w-7 text-black" />
               </Button>
             </div>
 
@@ -86,56 +88,83 @@ const AlbumPage = () => {
 
               {/* songs list */}
 
-              {/* <div className="px-6">
+              <div className="px-6">
                 <div className="space-y-2 py-4">
                   {currentAlbum?.songs.map((song, index) => {
-                    const isCurrentSong = currentSong?._id === song._id;
                     return (
-                      <div
-                        key={song._id}
-                        // onClick={() => handlePlaySong(index)}
+                      <motion.div
+                        initial={{ backgroundColor: "rgba(255, 255, 255, 0)" }}
+                        whileHover={{
+                          backgroundColor: "rgba(255, 255, 255, 0.05)",
+                          scale: 1.01,
+                          transition: { duration: 0.2 },
+                        }}
                         className={`grid grid-cols-[16px_4fr_2fr_1fr] gap-4 px-4 py-2 text-sm 
-                      text-zinc-400 hover:bg-white/5 rounded-md group cursor-pointer
-                      `}
+                        text-zinc-400 rounded-md group cursor-pointer`}
                       >
                         <div className="flex items-center justify-center">
-                          {isCurrentSong && isPlaying ? (
-                            <div className="size-4 text-green-500">♫</div>
-                          ) : (
-                            <span className="group-hover:hidden">
-                              {index + 1}
-                            </span>
-                          )}
-                          {!isCurrentSong && (
-                            <Play className="h-4 w-4 hidden group-hover:block" />
-                          )}
+                          <motion.span
+                            initial={{ opacity: 1 }}
+                            whileHover={{ opacity: 0 }}
+                          >
+                            {index + 1}
+                          </motion.span>
+
+                          <motion.div
+                            initial={{ opacity: 0, display: "none" }}
+                            whileHover={{ opacity: 1 }}
+                            className="group-hover:block"
+                          >
+                            <Play className="h-4 w-4" />
+                          </motion.div>
                         </div>
 
                         <div className="flex items-center gap-3">
-                          <img
+                          <motion.img
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ type: "spring", stiffness: 300 }}
                             src={song.imageUrl}
                             alt={song.title}
                             className="size-10"
                           />
 
                           <div>
-                            <div className={`font-medium text-white`}>
+                            <motion.div
+                              initial={{ color: "#ffffff" }}
+                              whileHover={{ color: "rgba(255, 255, 255, 0.9)" }}
+                              className="font-medium"
+                            >
                               {song.title}
-                            </div>
-                            <div>{song.artist}</div>
+                            </motion.div>
+                            <motion.div
+                              initial={{ color: "rgb(161, 161, 170)" }}
+                              whileHover={{ color: "rgb(212, 212, 216)" }}
+                            >
+                              {song.artist}
+                            </motion.div>
                           </div>
                         </div>
-                        <div className="flex items-center">
+
+                        <motion.div
+                          initial={{ color: "rgb(161, 161, 170)" }}
+                          whileHover={{ color: "rgb(212, 212, 216)" }}
+                          className="flex items-center"
+                        >
                           {song.createdAt.split("T")[0]}
-                        </div>
-                        <div className="flex items-center">
+                        </motion.div>
+
+                        <motion.div
+                          initial={{ color: "rgb(161, 161, 170)" }}
+                          whileHover={{ color: "rgb(212, 212, 216)" }}
+                          className="flex items-center"
+                        >
                           {formatDuration(song.duration)}
-                        </div>
-                      </div>
+                        </motion.div>
+                      </motion.div>
                     );
                   })}
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>

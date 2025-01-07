@@ -28,7 +28,7 @@ const LeftSidebar = () => {
               buttonVariants({
                 variant: "ghost",
                 className:
-                  "w-full justify-start text-[#B8B8B8] hover:bg-gradient-to-r from-[#B5179E] to-[#7209B7] hover:text-[#ffffff]",
+                  "w-full justify-start text-[#B8B8B8] hover:bg-gradient-to-r from-[#B5179E]/50 to-[#7209B7]/20 hover:text-[#ffffff]",
               })
             )}
           >
@@ -43,7 +43,7 @@ const LeftSidebar = () => {
                 buttonVariants({
                   variant: "ghost",
                   className:
-                    "w-full justify-start text-[#B8B8B8] hover:bg-gradient-to-r from-[#B5179E] to-[#7209B7] hover:text-[#ffffff]",
+                    "w-full justify-start text-[#B8B8B8] hover:bg-gradient-to-r from-[#B5179E]/50 to-[#7209B7]/20 hover:text-[#ffffff]",
                 })
               )}
             >

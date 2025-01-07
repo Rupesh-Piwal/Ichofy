@@ -4,19 +4,18 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { useMusicStore } from "@/stores/useMusicStore";
 import { SignedIn } from "@clerk/clerk-react";
-
+import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import { HomeIcon, Library, MessageCircle } from "lucide-react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
-
+import { Album } from "@/types";
 const LeftSidebar = () => {
   const { albums, fetchAlbums, isLoading } = useMusicStore();
-
+  const location = useLocation();
   useEffect(() => {
     fetchAlbums();
   }, [fetchAlbums]);
 
-  console.log({ albums });
 
   return (
     <div className="h-full flex flex-col gap-2">
@@ -67,26 +66,85 @@ const LeftSidebar = () => {
             {isLoading ? (
               <PlaylistSkeleton />
             ) : (
-              albums.map((album) => (
-                <Link
-                  to={`/albums/${album._id}`}
-                  key={album._id}
-                  className="p-2 hover:bg-zinc-800 rounded-md flex items-center gap-3 group cursor-pointer"
-                >
-                  <img
-                    src={album.imageUrl}
-                    alt="Playlist img"
-                    className="size-12 rounded-md flex-shrink-0 object-cover"
-                  />
+              albums.map((album: Album) => {
+                const isCurrentAlbum =
+                  location.pathname === `/albums/${album._id}`;
+                return (
+                  <motion.div
+                    key={album._id} 
+                    whileHover={{
+                      scale: 1.02,
+                      transition: {
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 17,
+                      },
+                    }}
+                  >
+                    <Link
+                      to={`/albums/${album._id}`}
+                      className={`relative p-2 rounded-md flex items-center gap-3 group cursor-pointer overflow-hidden
+                      ${
+                        isCurrentAlbum
+                          ? "bg-gradient-to-r from-[#B5179E]/50 to-[#7209B7]/20"
+                          : ""
+                      }`}
+                    >
+                   
+                      {!isCurrentAlbum && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          whileHover={{ opacity: 1 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute inset-0 bg-gradient-to-r from-[#B5179E]/50 to-[#7209B7]/20"
+                        />
+                      )}
 
-                  <div className="flex-1 min-w-0 hidden md:block">
-                    <p className="font-medium truncate">{album.title}</p>
-                    <p className="text-sm text-zinc-400 truncate">
-                      Album • {album.artist}
-                    </p>
-                  </div>
-                </Link>
-              ))
+                      <motion.img
+                        initial={{ scale: 1 }}
+                        whileHover={{
+                          scale: 1.08,
+                          rotate: 2,
+                          transition: {
+                            type: "spring",
+                            stiffness: 400,
+                            damping: 17,
+                          },
+                        }}
+                        src={album.imageUrl}
+                        alt="Playlist img"
+                        className="size-12 rounded-md flex-shrink-0 object-cover relative z-10"
+                      />
+
+                      <motion.div
+                        initial={{ x: 0 }}
+                        whileHover={{ x: 5 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 20,
+                        }}
+                        className="flex-1 min-w-0 hidden md:block relative z-10"
+                      >
+                        <motion.p
+                          initial={{ opacity: 0.9 }}
+                          whileHover={{ opacity: 1 }}
+                          className="font-medium truncate"
+                        >
+                          {album.title}
+                        </motion.p>
+                        <motion.p
+                          initial={{ opacity: 0.7 }}
+                          whileHover={{ opacity: 0.9 }}
+                          className="text-sm text-zinc-400 truncate"
+                        >
+                          Album • {album.artist}
+                        </motion.p>
+                      </motion.div>
+                    </Link>
+                  </motion.div>
+                );
+              })
             )}
           </div>
         </ScrollArea>

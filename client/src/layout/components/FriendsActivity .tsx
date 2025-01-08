@@ -35,7 +35,6 @@ const FriendsActivity = () => {
       <ScrollArea className="flex-1">
         <div className="p-4 space-y-4">
           {users.map((user) => {
-
             return (
               <div
                 key={user._id}
@@ -47,9 +46,7 @@ const FriendsActivity = () => {
                       <AvatarImage src={user.imageUrl} alt={user.fullName} />
                       <AvatarFallback>{user.fullName[0]}</AvatarFallback>
                     </Avatar>
-                    <div
-                      
-                    />
+                    <div />
                   </div>
 
                   <div className="flex-1 min-w-0">
@@ -113,19 +110,17 @@ const LoginPrompt = () => {
     },
   };
 
-  const floatingIcons = {
-    animate: (i: number) => ({
-      y: [-8, 8],
-      x: [-5, 5],
-      rotate: [-5, 5],
-      transition: {
-        duration: 3 + i * 0.5,
-        repeat: Infinity,
-        repeatType: "reverse",
-        ease: "easeInOut",
-      },
-    }),
-  };
+  const getFloatingIconVariants = (i: number) => ({
+    y: [-8, 8],
+    x: [-5, 5],
+    rotate: [-5, 5],
+    transition: {
+      duration: 3 + i * 0.5,
+      repeat: Infinity,
+      repeatType: "reverse" as const, // Ensure this is a valid literal type
+      ease: "easeInOut",
+    },
+  });
 
   const glowVariants = {
     initial: {
@@ -143,20 +138,18 @@ const LoginPrompt = () => {
     },
   };
 
-  const particleVariants = {
-    animate: (i: number) => ({
-      y: [-20, 20],
-      x: [-15, 15],
-      opacity: [0.2, 0.8, 0.2],
-      scale: [0.8, 1.2, 0.8],
-      transition: {
-        duration: 4 + i * 0.5,
-        repeat: Infinity,
-        repeatType: "reverse",
-        ease: "easeInOut",
-      },
-    }),
-  };
+  const getParticleVariants = (i: number) => ({
+    y: [-20, 20],
+    x: [-15, 15],
+    opacity: [0.2, 0.8, 0.2],
+    scale: [0.8, 1.2, 0.8],
+    transition: {
+      duration: 4 + i * 0.5,
+      repeat: Infinity,
+      repeatType: "reverse" as const, // Ensure this is a valid literal type
+      ease: "easeInOut",
+    },
+  });
 
   const backgroundIcons = [
     Users2Icon,
@@ -182,7 +175,7 @@ const LoginPrompt = () => {
               key={i}
               className="absolute"
               custom={i}
-              variants={particleVariants}
+              variants={{ animate: getParticleVariants(i) }}
               animate="animate"
               style={{
                 left: `${Math.random() * 100}%`,
@@ -201,7 +194,7 @@ const LoginPrompt = () => {
               key={i}
               className="absolute"
               custom={i}
-              variants={floatingIcons}
+              variants={{ animate: getFloatingIconVariants(i) }}
               animate="animate"
               style={{
                 left: `${i * 20 + Math.random() * 20}%`,

@@ -1,6 +1,7 @@
 import Topbar from "@/components/Topbar";
 import { useMusicStore } from "@/stores/useMusicStore";
 import { useEffect } from "react";
+import FeaturedSection from "./components/FeaturedSection";
 
 const HomePage = () => {
   const {
@@ -18,11 +19,12 @@ const HomePage = () => {
     fetchMadeForYouSongs();
     fetchTrendingSongs();
   }, [fetchFeaturedSongs, fetchMadeForYouSongs, fetchTrendingSongs]);
-  console.log({fetchFeaturedSongs, fetchMadeForYouSongs, fetchTrendingSongs});
+  console.log({ fetchFeaturedSongs, fetchMadeForYouSongs, fetchTrendingSongs });
 
   return (
     <div>
       <Topbar />
+      <FeaturedSection />
     </div>
   );
 };

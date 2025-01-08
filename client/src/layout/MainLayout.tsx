@@ -25,7 +25,7 @@ const MainLayout = () => {
           <LeftSidebar />
         </ResizablePanel>
 
-        <ResizableHandle className="w-1 bg-zinc-800 rounded-lg transition-colors" />
+        <ResizableHandle className="w-1 bg-zinc-900 rounded-lg transition-colors" />
 
         {/* Main content */}
         <ResizablePanel defaultSize={isMobile ? 80 : 60}>
@@ -34,7 +34,7 @@ const MainLayout = () => {
 
         {!isMobile && (
           <>
-            <ResizableHandle className="w-1 bg-zinc-800  rounded-lg transition-colors" />
+            <ResizableHandle className="w-1 bg-zinc-900  rounded-lg transition-colors" />
 
             <ResizablePanel
               defaultSize={20}

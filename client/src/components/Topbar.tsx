@@ -1,15 +1,16 @@
 import { SignedOut, UserButton } from "@clerk/clerk-react";
-// import { LayoutDashboardIcon } from "lucide-react";
-// import { Link } from "react-router-dom";
 import SignInOAuthButtons from "./SignInOAuthButtons ";
 import Logo from "./logo/Logo";
-// import { useAuthStore } from "@/stores/useAuthStore";
-// import { cn } from "@/lib/utils";
-// import { buttonVariants } from "./ui/button";
+import { useAuthStore } from "@/stores/useAuthStore";
+import { Link } from "react-router-dom";
+import { LayoutDashboardIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "./ui/button";
+
 
 const Topbar = () => {
-  //   const { isAdmin } = false
-  //   console.log({ isAdmin });
+    const { isAdmin } = useAuthStore()
+    console.log({ isAdmin });
 
   return (
     <div
@@ -21,7 +22,7 @@ const Topbar = () => {
         <Logo />
       </div>
       <div className="flex items-center gap-4">
-        {/* {isAdmin && (
+        {isAdmin && (
           <Link
             to={"/admin"}
             className={cn(buttonVariants({ variant: "outline" }))}
@@ -29,7 +30,7 @@ const Topbar = () => {
             <LayoutDashboardIcon className="size-4  mr-2" />
             Admin Dashboard
           </Link>
-        )} */}
+        )}
 
         <SignedOut>
           <SignInOAuthButtons />

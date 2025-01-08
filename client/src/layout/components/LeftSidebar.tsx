@@ -16,7 +16,6 @@ const LeftSidebar = () => {
     fetchAlbums();
   }, [fetchAlbums]);
 
-
   return (
     <div className="h-full flex flex-col gap-2">
       <div className="rounded-lg bg-[#111111] p-4">
@@ -71,7 +70,7 @@ const LeftSidebar = () => {
                   location.pathname === `/albums/${album._id}`;
                 return (
                   <motion.div
-                    key={album._id} 
+                    key={album._id}
                     whileHover={{
                       scale: 1.02,
                       transition: {
@@ -90,11 +89,9 @@ const LeftSidebar = () => {
                           : ""
                       }`}
                     >
-                   
                       {!isCurrentAlbum && (
                         <motion.div
                           initial={{ opacity: 0 }}
-                          whileHover={{ opacity: 1 }}
                           transition={{ duration: 0.2 }}
                           className="absolute inset-0 bg-gradient-to-r from-[#B5179E]/50 to-[#7209B7]/20"
                         />

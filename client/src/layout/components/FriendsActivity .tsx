@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useChatStore } from "@/stores/useChatStore";
-import { useUser } from "@clerk/clerk-react";
+import { SignIn, useSignIn, useUser } from "@clerk/clerk-react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   HeadphonesIcon,
@@ -21,6 +21,13 @@ const FriendsActivity = () => {
   useEffect(() => {
     if (user) fetchUsers();
   }, [fetchUsers, user]);
+
+  const { signIn, isLoaded } = useSignIn();
+
+  if (!isLoaded) {
+    return null;
+  }
+
   return (
     <div>
       <div className="p-4 flex justify-between items-center border-b border-zinc-800">
@@ -87,6 +94,20 @@ export default FriendsActivity;
 const LoginPrompt = () => {
   const [isHovered, setIsHovered] = useState(false);
 
+  const { signIn, isLoaded } = useSignIn();
+
+  if (!isLoaded) {
+    return null;
+  }
+
+  const signInWithGoogle = () => {
+    signIn.authenticateWithRedirect({
+      strategy: "oauth_google",
+      redirectUrl: "/sso-callback",
+      redirectUrlComplete: "/auth-callback",
+    });
+  };
+
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -117,7 +138,7 @@ const LoginPrompt = () => {
     transition: {
       duration: 3 + i * 0.5,
       repeat: Infinity,
-      repeatType: "reverse" as const, // Ensure this is a valid literal type
+      repeatType: "reverse" as const,
       ease: "easeInOut",
     },
   });
@@ -146,7 +167,7 @@ const LoginPrompt = () => {
     transition: {
       duration: 4 + i * 0.5,
       repeat: Infinity,
-      repeatType: "reverse" as const, // Ensure this is a valid literal type
+      repeatType: "reverse" as const,
       ease: "easeInOut",
     },
   });
@@ -265,6 +286,7 @@ const LoginPrompt = () => {
             <AnimatePresence>
               {isHovered && (
                 <motion.button
+                  onClick={signInWithGoogle}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}

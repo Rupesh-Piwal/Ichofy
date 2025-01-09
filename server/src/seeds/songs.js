@@ -131,6 +131,27 @@ const songs = [
     audioUrl: "/songs/18.mp3",
     duration: 29, // 0:29
   },
+  {
+    title: "Baby",
+    artist: "Justin Bieber",
+    imageUrl: "/cover-images/19.jpg",
+    audioUrl: "/songs/19.mp3",
+    duration: 50,
+  },
+  {
+    title: "Boyfriend",
+    artist: "Justin Bieber",
+    imageUrl: "/cover-images/20.jpg",
+    audioUrl: "/songs/20.mp3",
+    duration: 42,
+  },
+  {
+    title: "Love Me",
+    artist: "Justin Bieber",
+    imageUrl: "/cover-images/21.jpg",
+    audioUrl: "/songs/21.mp3",
+    duration: 51,
+  },
 ];
 
 const seedSongs = async () => {

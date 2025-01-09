@@ -127,6 +127,30 @@ const seedDatabase = async () => {
         plays: Math.floor(Math.random() * 5000),
         duration: 17, // 0:17
       },
+      {
+        title: "Baby",
+        artist: "Justin Bieber",
+        imageUrl: "/cover-images/19.jpg",
+        audioUrl: "/songs/19.mp3",
+        plays: Math.floor(Math.random() * 5000),
+        duration: 50,
+      },
+      {
+        title: "Boyfriend",
+        artist: "Justin Bieber",
+        imageUrl: "/cover-images/20.jpg",
+        audioUrl: "/songs/20.mp3",
+        plays: Math.floor(Math.random() * 5000),
+        duration: 42,
+      },
+      {
+        title: "Love Me",
+        artist: "Justin Bieber",
+        imageUrl: "/cover-images/21.jpg",
+        audioUrl: "/songs/21.mp3",
+        plays: Math.floor(Math.random() * 5000),
+        duration: 51,
+      },
     ]);
 
     // Create albums with references to song IDs
@@ -158,6 +182,13 @@ const seedDatabase = async () => {
         imageUrl: "/albums/4.jpg",
         releaseYear: 2024,
         songs: createdSongs.slice(11, 14).map((song) => song._id),
+      },
+      {
+        title: "My World",
+        artist: "Justin Bieber",
+        imageUrl: "/albums/5.jpg",
+        releaseYear: 2024,
+        songs: createdSongs.slice(14, 17).map((song) => song._id),
       },
     ];
 

@@ -19,13 +19,10 @@ const AnimatedAlbumCover: React.FC<AnimatedAlbumCoverProps> = ({
         className="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
       />
 
-      {/* Enhanced gradient overlay */}
       <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-[#B5179E]/20 via-transparent to-[#7209B7]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-      {/* Bottom gradient for waves */}
       <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-black/40 to-transparent rounded-b-lg" />
 
-      {/* Animated waves */}
       {isPlaying && (
         <div className="absolute bottom-1 left-0 right-0 flex items-end justify-center h-6 overflow-hidden">
           <svg viewBox="0 0 60 20" className="w-12 h-4">
@@ -65,7 +62,6 @@ const AnimatedAlbumCover: React.FC<AnimatedAlbumCoverProps> = ({
   );
 };
 
-// Add the following styles to your global CSS or Tailwind config
 const style = `
   @keyframes wave-1 { 0%, 100% { transform: scaleY(0.8); } 50% { transform: scaleY(1.5); } }
   @keyframes wave-2 { 0%, 100% { transform: scaleY(0.6); } 50% { transform: scaleY(1.3); } }

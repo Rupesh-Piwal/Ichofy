@@ -14,6 +14,7 @@ import {
   Volume1,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import AnimatedAlbumCover from "./AnimatedAlbumCover ";
 
 const formatTime = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
@@ -32,20 +33,15 @@ export const PlaybackControls = () => {
 
   useEffect(() => {
     audioRef.current = document.querySelector("audio");
-
     const audio = audioRef.current;
     if (!audio) return;
 
     const updateTime = () => setCurrentTime(audio.currentTime);
     const updateDuration = () => setDuration(audio.duration);
+    const handleEnded = () => usePlayerStore.setState({ isPlaying: false });
 
     audio.addEventListener("timeupdate", updateTime);
     audio.addEventListener("loadedmetadata", updateDuration);
-
-    const handleEnded = () => {
-      usePlayerStore.setState({ isPlaying: false });
-    };
-
     audio.addEventListener("ended", handleEnded);
 
     return () => {
@@ -62,22 +58,23 @@ export const PlaybackControls = () => {
   };
 
   return (
-    <footer className="h-20 sm:h-24 bg-zinc-900 border-t border-zinc-800 px-4">
-      <div className="flex justify-between items-center h-full max-w-[1800px] mx-auto">
-        {/* currently playing song */}
+    <footer className="relative h-20 sm:h-24 bg-zinc-900/90 backdrop-blur-lg border-t border-white/5">
+      <div className="absolute inset-0 bg-gradient-to-r from-[#B5179E]/5 to-[#7209B7]/5" />
+
+      <div className="relative flex justify-between items-center h-full max-w-[1800px] mx-auto px-4">
         <div className="hidden sm:flex items-center gap-4 min-w-[180px] w-[30%]">
           {currentSong && (
             <>
-              <img
-                src={currentSong.imageUrl}
-                alt={currentSong.title}
-                className="w-14 h-14 object-cover rounded-md"
+              <AnimatedAlbumCover
+                imageUrl={currentSong.imageUrl}
+                title={currentSong.title}
+                isPlaying={isPlaying}
               />
               <div className="flex-1 min-w-0">
-                <div className="font-medium truncate hover:underline cursor-pointer">
+                <div className="font-medium truncate transition-colors duration-300 cursor-pointer">
                   {currentSong.title}
                 </div>
-                <div className="text-sm text-zinc-400 truncate hover:underline cursor-pointer">
+                <div className="text-sm text-zinc-400 truncate transition-colors duration-300 cursor-pointer">
                   {currentSong.artist}
                 </div>
               </div>
@@ -90,7 +87,7 @@ export const PlaybackControls = () => {
             <Button
               size="icon"
               variant="ghost"
-              className="hidden sm:inline-flex hover:text-white text-zinc-400"
+              className="hidden sm:inline-flex hover:text-[#B5179E] text-zinc-400 transition-colors duration-300"
             >
               <Shuffle className="h-4 w-4" />
             </Button>
@@ -98,7 +95,7 @@ export const PlaybackControls = () => {
             <Button
               size="icon"
               variant="ghost"
-              className="hover:text-white text-zinc-400"
+              className="hover:text-[#B5179E] text-zinc-400 transition-colors duration-300"
               onClick={playPrevious}
               disabled={!currentSong}
             >
@@ -107,36 +104,47 @@ export const PlaybackControls = () => {
 
             <Button
               size="icon"
-              className="bg-white hover:bg-white/80 text-black rounded-full h-8 w-8"
+              className={`
+                relative group
+                bg-gradient-to-br from-[#B5179E] to-[#7209B7]
+                hover:from-[#c428ab] hover:to-[#8319cc]
+                text-white rounded-full h-10 w-10
+                transition-transform duration-300
+                hover:scale-110
+                ${isPlaying ? "scale-105" : "scale-100"}
+              `}
               onClick={togglePlay}
               disabled={!currentSong}
             >
+              <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               {isPlaying ? (
-                <Pause className="h-5 w-5" />
+                <Pause className="h-5 w-5 relative z-10" />
               ) : (
-                <Play className="h-5 w-5" />
+                <Play className="h-5 w-5 relative z-10 translate-x-0.5" />
               )}
             </Button>
+
             <Button
               size="icon"
               variant="ghost"
-              className="hover:text-white text-zinc-400"
+              className="hover:text-[#B5179E] text-zinc-400 transition-colors duration-300"
               onClick={playNext}
               disabled={!currentSong}
             >
               <SkipForward className="h-4 w-4" />
             </Button>
+
             <Button
               size="icon"
               variant="ghost"
-              className="hidden sm:inline-flex hover:text-white text-zinc-400"
+              className="hidden sm:inline-flex hover:text-[#B5179E] text-zinc-400 transition-colors duration-300"
             >
               <Repeat className="h-4 w-4" />
             </Button>
           </div>
 
           <div className="hidden sm:flex items-center gap-2 w-full">
-            <div className="text-xs text-zinc-400">
+            <div className="text-xs text-zinc-400 transition-colors">
               {formatTime(currentTime)}
             </div>
             <Slider
@@ -146,7 +154,9 @@ export const PlaybackControls = () => {
               className="w-full hover:cursor-grab active:cursor-grabbing"
               onValueChange={handleSeek}
             />
-            <div className="text-xs text-zinc-400">{formatTime(duration)}</div>
+            <div className="text-xs text-zinc-400 transition-colors ">
+              {formatTime(duration)}
+            </div>
           </div>
         </div>
 
@@ -154,21 +164,21 @@ export const PlaybackControls = () => {
           <Button
             size="icon"
             variant="ghost"
-            className="hover:text-white text-zinc-400"
+            className="hover:text-[#B5179E] text-zinc-400 transition-colors duration-300"
           >
             <Mic2 className="h-4 w-4" />
           </Button>
           <Button
             size="icon"
             variant="ghost"
-            className="hover:text-white text-zinc-400"
+            className="hover:text-[#B5179E] text-zinc-400 transition-colors duration-300"
           >
             <ListMusic className="h-4 w-4" />
           </Button>
           <Button
             size="icon"
             variant="ghost"
-            className="hover:text-white text-zinc-400"
+            className="hover:text-[#B5179E] text-zinc-400 transition-colors duration-300"
           >
             <Laptop2 className="h-4 w-4" />
           </Button>
@@ -177,7 +187,7 @@ export const PlaybackControls = () => {
             <Button
               size="icon"
               variant="ghost"
-              className="hover:text-white text-zinc-400"
+              className="hover:text-[#B5179E] text-zinc-400 transition-colors duration-300"
             >
               <Volume1 className="h-4 w-4" />
             </Button>

@@ -12,7 +12,7 @@ const SectionGrid = ({ songs, title, isLoading }: SectionGridProps) => {
   if (isLoading) return <SectionGridSkeleton />;
 
   return (
-    <section className="mb-12 px-4 py-6 bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-xl shadow-xl">
+    <section className="mb-12 px-4 py-6 bg-gradient-to-br from-zinc-900/30 to-zinc-800/50 rounded-xl shadow-xl">
       <h2 className="text-2xl sm:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-800 to-pink-600 mb-6">
         {title}
       </h2>

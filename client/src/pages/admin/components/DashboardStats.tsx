@@ -1,7 +1,9 @@
+"use client";
+
 import { useMusicStore } from "@/stores/useMusicStore";
 import { Library, ListMusic, PlayCircle, Users2 } from "lucide-react";
+import { motion } from "framer-motion";
 import StatsCard from "./StatsCard";
-
 
 const DashboardStats = () => {
   const { stats } = useMusicStore();
@@ -11,45 +13,52 @@ const DashboardStats = () => {
       icon: ListMusic,
       label: "Total Songs",
       value: stats.totalSongs.toString(),
-      bgColor: "bg-emerald-500/10",
-      iconColor: "text-emerald-500",
+      bgColor: "bg-blue-800/10",
+      iconColor: "bg-blue-800",
     },
     {
       icon: Library,
       label: "Total Albums",
       value: stats.totalAlbums.toString(),
-      bgColor: "bg-violet-500/10",
-      iconColor: "text-violet-500",
+      bgColor: "bg-green-800/10",
+      iconColor: "bg-green-800",
     },
     {
       icon: Users2,
       label: "Total Artists",
       value: stats.totalArtists.toString(),
-      bgColor: "bg-orange-500/10",
-      iconColor: "text-orange-500",
+      bgColor: "bg-purple-800/10",
+      iconColor: "bg-purple-800",
     },
     {
       icon: PlayCircle,
       label: "Total Users",
       value: stats.totalUsers.toLocaleString(),
-      bgColor: "bg-sky-500/10",
-      iconColor: "text-sky-500",
+      bgColor: "bg-red-800/10",
+      iconColor: "bg-red-800",
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 ">
-      {statsData.map((stat) => (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+    >
+      {statsData.map((stat, index) => (
         <StatsCard
           key={stat.label}
           icon={stat.icon}
           label={stat.label}
           value={stat.value}
+          index={index}
           bgColor={stat.bgColor}
           iconColor={stat.iconColor}
         />
       ))}
-    </div>
+    </motion.div>
   );
 };
+
 export default DashboardStats;

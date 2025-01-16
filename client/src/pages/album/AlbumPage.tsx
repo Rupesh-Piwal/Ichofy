@@ -17,6 +17,7 @@ const AlbumPage = () => {
   const { albumId } = useParams();
   const { fetchAlbumById, currentAlbum, isLoading } = useMusicStore();
   const { currentSong, isPlaying, playAlbum, togglePlay } = usePlayerStore();
+  
 
   useEffect(() => {
     if (albumId) fetchAlbumById(albumId);

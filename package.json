@@ -1,0 +1,22 @@
+{
+  "name": "ichofy",
+  "version": "1.0.0",
+  "description": "Welcome to **Ichofy** - a modern, web-based music player inspired by Spotify! Museek is designed to bring an immersive music experience to your fingertips while incorporating cutting-edge real-time features to enhance user interaction and engagement.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix server && npm install --prefix client && npm run build --prefix client",
+    "start": "npm start --prefix server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rupesh-Piwal/Museek.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Rupesh-Piwal/Museek/issues"
+  },
+  "homepage": "https://github.com/Rupesh-Piwal/Museek#readme"
+}

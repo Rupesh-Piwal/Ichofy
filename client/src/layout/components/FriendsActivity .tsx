@@ -17,7 +17,6 @@ import { useEffect, useState } from "react";
 const FriendsActivity = () => {
   const { users, fetchUsers, onlineUsers, userActivities } = useChatStore();
   const { user } = useUser();
-  const isPlaying = false;
 
   useEffect(() => {
     if (user) fetchUsers();

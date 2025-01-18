@@ -1,6 +1,6 @@
-# Museek 🎵
+# Ichofy 🎵
 
-Welcome to **Museek** - a modern, web-based music player inspired by Spotify! Museek is designed to bring an immersive music experience to your fingertips while incorporating cutting-edge real-time features to enhance user interaction and engagement.
+Welcome to **Ichofy** - a modern, web-based music player inspired by Spotify! Museek is designed to bring an immersive music experience to your fingertips while incorporating cutting-edge real-time features to enhance user interaction and engagement.
 
 ---
 
@@ -13,7 +13,6 @@ Welcome to **Museek** - a modern, web-based music player inspired by Spotify! Mu
 - 👨🏼‍💼 **Online/Offline status**: See who's online and ready to chat.
 - 👀 **Friend activity**: See what others are listening to in real-time.
 - 📊 **Analytics dashboard**: Gain insights into aggregated user data.
-- 🚀 **And much more...**
 
 ---
 
@@ -22,6 +21,7 @@ Welcome to **Museek** - a modern, web-based music player inspired by Spotify! Mu
 - **Frontend**: React, Tailwind CSS
 - **Backend**: Node.js, Express
 - **Database**: MongoDB
+- **State-Management**: Zustand
 - **Authentication**: Clerk
 - **Real-time Features**: Socket.IO
 - **Deployment**: Render.com

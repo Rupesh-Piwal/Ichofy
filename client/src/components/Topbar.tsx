@@ -7,10 +7,9 @@ import { LayoutDashboardIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./ui/button";
 
-
 const Topbar = () => {
-    const { isAdmin } = useAuthStore()
-    console.log({ isAdmin });
+  const { isAdmin } = useAuthStore();
+  console.log({ isAdmin });
 
   return (
     <div
@@ -18,9 +17,9 @@ const Topbar = () => {
       backdrop-blur-md z-10
     "
     >
-      <div className="flex gap-2 items-center">
+      <Link to="/" className="flex gap-2 items-center">
         <Logo />
-      </div>
+      </Link>
       <div className="flex items-center gap-4">
         {isAdmin && (
           <Link

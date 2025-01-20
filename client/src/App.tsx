@@ -11,7 +11,7 @@ import NotFoundPage from "./pages/404/NotFoundPage";
 
 function App() {
   return (
-    <>
+    <div className="font-sleek">
       <Routes>
         <Route
           path="/sso-callback"
@@ -32,7 +32,7 @@ function App() {
         </Route>
       </Routes>
       <Toaster />
-    </>
+    </div>
   );
 }
 

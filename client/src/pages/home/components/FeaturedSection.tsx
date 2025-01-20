@@ -9,13 +9,13 @@ const FeaturedSection = () => {
 
   if (error)
     return (
-      <div className="rounded-lg bg-red-500/10 border border-red-500/20 p-4">
+      <div className="font-body rounded-lg bg-red-500/10 border border-red-500/20 p-4">
         <p className="text-red-500 text-lg">{error}</p>
       </div>
     );
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+    <div className="font-sleek grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
       {featuredSongs.map((song) => (
         <div
           key={song._id}

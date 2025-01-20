@@ -48,7 +48,7 @@ const HomePage = () => {
 
           <FeaturedSection />
 
-          <div className="space-y-8">
+          <div className="font-readable space-y-8">
             <SectionGrid
               title="Made For You"
               songs={madeForYouSongs}

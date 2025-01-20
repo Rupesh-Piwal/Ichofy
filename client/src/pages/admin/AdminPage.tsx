@@ -51,7 +51,7 @@ const AdminPage = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen bg-gradient-to-br from-[#7209B7]/10 via-black to-[#B5179E]/10 text-zinc-100 p-8"
+      className="min-h-screen bg-gradient-to-br from-[#7209B7]/10 via-black to-[#B5179E]/10 text-slate-300 p-2 md:p-8"
     >
       <motion.div
         initial={{ y: -20, opacity: 0 }}

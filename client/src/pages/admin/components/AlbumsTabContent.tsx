@@ -45,7 +45,7 @@ const AlbumsTabContent = () => {
                   Albums Library
                 </span>
               </CardTitle>
-              <CardDescription className="text-zinc-400">
+              <CardDescription className="text-slate-400">
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}

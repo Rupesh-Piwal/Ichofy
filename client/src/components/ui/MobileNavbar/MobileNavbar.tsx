@@ -18,7 +18,7 @@ const MobileNavbar = () => {
 
   const baseNavigationItems = [
     { icon: HomeIcon, label: "Home", href: "/" },
-    { icon: HeadphonesIcon, label: "Player", href: "/chat" },
+    { icon: HeadphonesIcon, label: "Player", href: "/user-activities" },
     { icon: Library, label: "Library", href: "/playlist" },
   ];
 

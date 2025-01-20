@@ -1,22 +1,17 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useChatStore } from "@/stores/useChatStore";
 import { useSignIn, useUser } from "@clerk/clerk-react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  HeadphonesIcon,
-  Users2Icon,
-  Disc3Icon,
-  Radio,
-  Music2Icon,
-  Users,
-  Music,
-} from "lucide-react";
-import { useEffect, useState } from "react";
+import { Users, Headphones, Music2, Disc3, Radio } from "lucide-react";
 
 const FriendsActivity = () => {
   const { users, fetchUsers, onlineUsers, userActivities } = useChatStore();
   const { user } = useUser();
+  const [hoveredUser, setHoveredUser] = useState<string | null>(null);
 
   useEffect(() => {
     if (user) fetchUsers();
@@ -29,79 +24,123 @@ const FriendsActivity = () => {
   }
 
   return (
-    <div>
-      <div className="p-4 flex justify-between items-center border-b border-zinc-800">
+    <motion.div
+      className="bg-gradient-to-br from-[#B5179E]/10 to-[#7209B7]/10 rounded-lg overflow-hidden backdrop-blur-lg border border-white/10 shadow-lg h-full"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="p-4 flex justify-between items-center border-b border-white/10">
         <div className="flex items-center gap-2">
-          <Users className="size-5 shrink-0" />
-          <h2 className="font-semibold">What they're listening to</h2>
+          <Users className="size-5 shrink-0 text-[#B5179E]/80" />
+          <h2 className="font-semibold text-white text-lg">Friend Activity</h2>
         </div>
       </div>
 
-      {!user && <LoginPrompt />}
-
-      <ScrollArea className="flex-1">
-        <div className="p-4 space-y-4">
-          {users.map((user) => {
-            const activity = userActivities.get(user.clerkId);
-            const isPlaying = activity && activity !== "Idle";
-            return (
-              <div
-                key={user._id}
-                className="cursor-pointer hover:bg-zinc-800/50 p-3 rounded-md transition-colors group"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="relative">
-                    <Avatar className="size-10 border border-zinc-800">
-                      <AvatarImage src={user.imageUrl} alt={user.fullName} />
-                      <AvatarFallback>{user.fullName[0]}</AvatarFallback>
-                    </Avatar>
-
-                    <div
-                      className={`absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-zinc-900 
-												${onlineUsers.has(user.clerkId) ? "bg-green-500" : "bg-zinc-500"}
-												`}
-                      aria-hidden="true"
-                    />
-                  </div>
-
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium text-sm text-white">
-                        {user.fullName}
-                      </span>
-                      {isPlaying && (
-                        <Music className="size-3.5 text-emerald-400 shrink-0" />
-                      )}
-                    </div>
-
-                    {isPlaying ? (
-                      <div className="mt-1">
-                        <div className="mt-1 text-sm text-white font-medium truncate">
-                          {activity.replace("Playing ", "").split(" by ")[0]}
-                        </div>
-                        <div className="text-xs text-zinc-400 truncate">
-                          {activity.split(" by ")[1]}
-                        </div>
+      {!user ? (
+        <LoginPrompt />
+      ) : (
+        <ScrollArea className="h-[calc(100vh-200px)]">
+          <div className="p-4 space-y-4">
+            <AnimatePresence>
+              {users.map((user) => {
+                const activity = userActivities.get(user.clerkId);
+                const isPlaying = activity && activity !== "Idle";
+                return (
+                  <motion.div
+                    key={user._id}
+                    className="cursor-pointer p-3 rounded-md transition-all group relative overflow-hidden"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    whileHover={{ scale: 1.02 }}
+                    onHoverStart={() => setHoveredUser(user._id)}
+                    onHoverEnd={() => setHoveredUser(null)}
+                  >
+                    <div className="flex items-start gap-3 relative z-10">
+                      <div className="relative">
+                        <Avatar className="size-12 border-[3px] border-[#B5179E]/80">
+                          <AvatarImage
+                            src={user.imageUrl}
+                            alt={user.fullName}
+                          />
+                          <AvatarFallback>{user.fullName[0]}</AvatarFallback>
+                        </Avatar>
+                        <motion.div
+                          className={`absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-[#7209B7] ${
+                            onlineUsers.has(user.clerkId)
+                              ? "bg-green-500"
+                              : "bg-zinc-500"
+                          }`}
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 500,
+                            damping: 30,
+                          }}
+                        />
                       </div>
-                    ) : (
-                      <div className="mt-1 text-xs text-zinc-400">Idle</div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="font-medium text-sm text-white group-hover:text-[#B5179E] transition-colors">
+                            {user.fullName}
+                          </span>
+                          {isPlaying && (
+                            <motion.div
+                              initial={{ scale: 0, rotate: -180 }}
+                              animate={{ scale: 1, rotate: 0 }}
+                              transition={{
+                                type: "spring",
+                                stiffness: 260,
+                                damping: 20,
+                              }}
+                            >
+                              <Headphones className="size-4 text-[#B5179E] shrink-0" />
+                            </motion.div>
+                          )}
+                        </div>
+                        {isPlaying ? (
+                          <div className="mt-1">
+                            <div className="text-sm text-white font-medium truncate group-hover:text-[#B5179E] transition-colors">
+                              {
+                                activity!
+                                  .replace("Playing ", "")
+                                  .split(" by ")[0]
+                              }
+                            </div>
+                            <div className="text-xs text-pink-300 truncate group-hover:text-[#7209B7] transition-colors">
+                              {activity!.split(" by ")[1]}
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="mt-1 text-xs text-pink-300 group-hover:text-[#7209B7] transition-colors">
+                            Idle
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    {hoveredUser === user._id && (
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-[#B5179E]/20 to-[#7209B7]/20 rounded-md"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                      />
                     )}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </ScrollArea>
-    </div>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </div>
+        </ScrollArea>
+      )}
+    </motion.div>
   );
 };
 
-export default FriendsActivity;
-
 const LoginPrompt = () => {
   const [isHovered, setIsHovered] = useState(false);
-
   const { signIn, isLoaded } = useSignIn();
 
   if (!isLoaded) {
@@ -145,7 +184,7 @@ const LoginPrompt = () => {
     rotate: [-5, 5],
     transition: {
       duration: 3 + i * 0.5,
-      repeat: Infinity,
+      repeat: Number.POSITIVE_INFINITY,
       repeatType: "reverse" as const,
       ease: "easeInOut",
     },
@@ -161,7 +200,7 @@ const LoginPrompt = () => {
       scale: [1, 1.2, 1],
       transition: {
         duration: 2.5,
-        repeat: Infinity,
+        repeat: Number.POSITIVE_INFINITY,
         ease: "easeInOut",
       },
     },
@@ -174,25 +213,18 @@ const LoginPrompt = () => {
     scale: [0.8, 1.2, 0.8],
     transition: {
       duration: 4 + i * 0.5,
-      repeat: Infinity,
+      repeat: Number.POSITIVE_INFINITY,
       repeatType: "reverse" as const,
       ease: "easeInOut",
     },
   });
 
-  const backgroundIcons = [
-    Users2Icon,
-    Music2Icon,
-    HeadphonesIcon,
-    Disc3Icon,
-    Radio,
-    Music2Icon,
-  ];
+  const backgroundIcons = [Users, Music2, Headphones, Disc3, Radio, Music2];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#7209B7]/10 via-zinc-900 to-[#B5179E]/20">
+    <div className="h-[calc(100vh-200px)] bg-gradient-to-b from-[#7209B7]/10 via-zinc-900 to-[#B5179E]/20">
       <motion.div
-        className="relative h-screen flex flex-col items-center justify-center p-6 text-center overflow-hidden"
+        className="relative h-full flex flex-col items-center justify-center p-6 text-center overflow-hidden"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -264,7 +296,7 @@ const LoginPrompt = () => {
               className="relative bg-zinc-900 rounded-full p-6 shadow-2xl items-center flex justify-center"
               whileTap={{ scale: 0.95 }}
             >
-              <HeadphonesIcon className="size-12 text-[#B5179E]" />
+              <Headphones className="size-12 text-[#B5179E]" />
             </motion.div>
           </motion.div>
 
@@ -312,3 +344,5 @@ const LoginPrompt = () => {
     </div>
   );
 };
+
+export default FriendsActivity;

@@ -37,7 +37,7 @@ const AlbumsTable = () => {
   }
 
   return (
-    <div className="relative rounded-xl overflow-hidden border border-[#7209B7]/10 bg-black/20 backdrop-blur-sm">
+    <div className="font-sleek relative rounded-xl overflow-hidden border border-[#7209B7]/10 bg-black/20 backdrop-blur-sm">
       <Table>
         <TableHeader>
           <TableRow className="hover:bg-[#7209B7]/5 border-b border-[#7209B7]/10">

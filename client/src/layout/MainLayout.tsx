@@ -9,6 +9,8 @@ import FriendsActivity from "./components/FriendsActivity ";
 import AudioPlayer from "./components/AudioPlayer";
 import { useEffect, useState } from "react";
 import { PlaybackControls } from "./components/PlaybackControls";
+import MobileNavbar from "@/components/ui/MobileNavbar/MobileNavbar";
+
 
 const MainLayout = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -30,8 +32,9 @@ const MainLayout = () => {
         className="flex-1 flex h-full overflow-hidden p-2"
       >
         <AudioPlayer />
-        
+
         <ResizablePanel
+        className="hidden md:inline-block"
           defaultSize={20}
           minSize={isMobile ? 0 : 10}
           maxSize={30}
@@ -42,7 +45,11 @@ const MainLayout = () => {
         <ResizableHandle className="w-2 bg-black rounded-lg transition-colors" />
 
         <ResizablePanel defaultSize={isMobile ? 80 : 60}>
-          <Outlet />
+          <div className="h-full overflow-hidden flex flex-col">
+            <div className="flex-1 overflow-auto pb-24">
+              <Outlet />
+            </div>
+          </div>
         </ResizablePanel>
 
         {!isMobile && (
@@ -62,7 +69,9 @@ const MainLayout = () => {
       </ResizablePanelGroup>
 
       <PlaybackControls />
+      {isMobile && <MobileNavbar />}
     </div>
   );
 };
+
 export default MainLayout;

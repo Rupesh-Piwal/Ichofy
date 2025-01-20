@@ -182,7 +182,7 @@ const LeftSidebar = () => {
 
   return (
     <>
-      <div className="font-body h-full flex flex-col gap-3 bg-gradient-to-r from-[#B5179E]/10 to-[#7209B7]/10">
+      <div className="font-body h-full md:flex flex-col gap-3 bg-gradient-to-r from-[#B5179E]/10 to-[#7209B7]/10">
         <motion.div
           className="rounded-xl bg-zinc-950/50 p-4 backdrop-blur-sm border border-white/5"
           whileHover={{ scale: 1.01 }}

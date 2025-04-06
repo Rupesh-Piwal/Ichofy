@@ -14,6 +14,8 @@ import authRoutes from "./routes/auth.route.js";
 import songRoutes from "./routes/song.route.js";
 import statRoutes from "./routes/stat.route.js";
 import cors from "cors";
+import axios from "axios";
+
 dotenv.config();
 
 const __dirname = path.resolve();
@@ -43,6 +45,18 @@ app.use(
     },
   })
 );
+
+const SELF_URL = "https://ichofy.onrender.com";
+
+// Ping every 14 minutes
+cron.schedule("*/14 * * * *", async () => {
+  try {
+    console.log(`Pinging ${SELF_URL} to keep server awake...`);
+    await axios.get(SELF_URL);
+  } catch (err) {
+    console.error("Ping failed:", err.message);
+  }
+});
 
 // cron jobs
 const tempDir = path.join(process.cwd(), "tmp");

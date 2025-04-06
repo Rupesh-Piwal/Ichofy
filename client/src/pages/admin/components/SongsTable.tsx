@@ -82,7 +82,6 @@ const SongsTable = () => {
                     className="relative overflow-hidden group"
                     onClick={() => deleteSong(song._id)}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#7209B7] to-[#B5179E] opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
                     <Trash2 className="size-4 text-red-700 group-hover:text-red-400 transition-colors duration-300" />
                   </Button>
                 </div>

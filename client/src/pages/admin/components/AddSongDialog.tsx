@@ -23,7 +23,8 @@ import { useMusicStore } from "@/stores/useMusicStore";
 import { Plus, Music, ImageIcon } from "lucide-react";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { motion} from "framer-motion";
+import { motion } from "framer-motion";
+import { useAuth } from "@clerk/clerk-react";
 
 interface NewSong {
   title: string;
@@ -33,6 +34,7 @@ interface NewSong {
 }
 
 const AddSongDialog = () => {
+  const { getToken } = useAuth();
   const { albums } = useMusicStore();
   const [songDialogOpen, setSongDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -56,6 +58,7 @@ const AddSongDialog = () => {
   const imageInputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async () => {
+    const token = await getToken();
     setIsLoading(true);
 
     try {
@@ -78,6 +81,7 @@ const AddSongDialog = () => {
       await axiosInstance.post("/admin/songs", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
       });
 

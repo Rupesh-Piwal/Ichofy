@@ -2,7 +2,6 @@ import { axiosInstance } from "@/lib/axios";
 import { Album, Song, Stats } from "@/types";
 import toast from "react-hot-toast";
 import { create } from "zustand";
-import { useAuth } from "@clerk/clerk-react";
 
 interface MusicStore {
   songs: Song[];
@@ -43,18 +42,9 @@ export const useMusicStore = create<MusicStore>((set) => ({
   },
 
   deleteSong: async (id) => {
-    const { getToken } = useAuth();
-    const token = await getToken();
-    console.log("🪪 Clerk token:", token);
-
     set({ isLoading: true, error: null });
     try {
-      await axiosInstance.delete(`/admin/songs/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      });
+      await axiosInstance.delete(`/admin/songs/${id}`);
 
       set((state) => ({
         songs: state.songs.filter((song) => song._id !== id),
@@ -69,17 +59,9 @@ export const useMusicStore = create<MusicStore>((set) => ({
   },
 
   deleteAlbum: async (id) => {
-    const { getToken } = useAuth();
-    const token = await getToken();
-    console.log("🪪 Clerk token:", token);
     set({ isLoading: true, error: null });
     try {
-      await axiosInstance.delete(`/admin/albums/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      });
+      await axiosInstance.delete(`/admin/albums/${id}`);
       set((state) => ({
         albums: state.albums.filter((album) => album._id !== id),
         songs: state.songs.map((song) =>
@@ -97,18 +79,9 @@ export const useMusicStore = create<MusicStore>((set) => ({
   },
 
   fetchSongs: async () => {
-    const { getToken } = useAuth();
-    const token = await getToken();
-    console.log("🪪 Clerk token:", token);
-
     set({ isLoading: true, error: null });
     try {
-      const response = await axiosInstance.get("/songs", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      });
+      const response = await axiosInstance.get("/songs");
       set({ songs: response.data });
     } catch (error: any) {
       set({ error: error.message });
@@ -118,18 +91,9 @@ export const useMusicStore = create<MusicStore>((set) => ({
   },
 
   fetchStats: async () => {
-    const { getToken } = useAuth();
-    const token = await getToken();
-    console.log("🪪 Clerk token:", token);
-
     set({ isLoading: true, error: null });
     try {
-      const response = await axiosInstance.get("/stats", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      });
+      const response = await axiosInstance.get("/stats");
       set({ stats: response.data });
     } catch (error: any) {
       set({ error: error.message });

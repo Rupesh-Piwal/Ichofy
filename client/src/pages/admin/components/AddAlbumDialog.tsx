@@ -15,9 +15,11 @@ import { axiosInstance } from "@/lib/axios";
 import { Plus, AlbumIcon } from "lucide-react";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { motion} from "framer-motion";
+import { motion } from "framer-motion";
+import { useAuth } from "@clerk/clerk-react";
 
 const AddAlbumDialog = () => {
+  const { getToken } = useAuth();
   const [albumDialogOpen, setAlbumDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -38,6 +40,7 @@ const AddAlbumDialog = () => {
   };
 
   const handleSubmit = async () => {
+    const token = await getToken();
     setIsLoading(true);
 
     try {
@@ -54,6 +57,7 @@ const AddAlbumDialog = () => {
       await axiosInstance.post("/admin/albums", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
       });
 

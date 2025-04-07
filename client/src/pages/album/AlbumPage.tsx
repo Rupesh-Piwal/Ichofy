@@ -17,7 +17,6 @@ const AlbumPage = () => {
   const { albumId } = useParams();
   const { fetchAlbumById, currentAlbum, isLoading } = useMusicStore();
   const { currentSong, isPlaying, playAlbum, togglePlay } = usePlayerStore();
-  
 
   useEffect(() => {
     if (albumId) fetchAlbumById(albumId);
@@ -98,7 +97,7 @@ const AlbumPage = () => {
                 <motion.img
                   src={currentAlbum?.imageUrl}
                   alt={currentAlbum?.title}
-                  className="w-[240px] h-[240px] shadow-xl rounded"
+                  className="w-[200px] h-[180px] md:w-[240px] md:h-[240px] shadow-xl rounded"
                   whileHover={{
                     boxShadow: "0 20px 30px rgba(0,0,0,0.3)",
                   }}
@@ -126,7 +125,7 @@ const AlbumPage = () => {
                   Album
                 </motion.p>
                 <motion.h1
-                  className="text-7xl font-bold my-4"
+                  className="text-4xl md:text-7xl font-bold my-4"
                   variants={itemVariants}
                   whileInView={{
                     opacity: [0.5, 1],

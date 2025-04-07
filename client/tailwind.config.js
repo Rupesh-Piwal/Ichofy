@@ -1,20 +1,12 @@
 /** @type {import('tailwindcss').Config} */
+import { fontFamily } from "tailwindcss/defaultTheme";
 export default {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
-        heading: ["Clash Grotesk", "sans-serif"], // Bold & Catchy
-        body: ["Inter", "sans-serif"], // Clean & Readable
-        alternative: ["Space Grotesk", "sans-serif"], // Modern & Unique
-        secondary: ["DM Sans", "sans-serif"], // Minimalist & UI-friendly
-        elegant: ["Poppins", "sans-serif"], // Stylish & Modern
-        sleek: ["Be Vietnam Pro", "sans-serif"], // Techy & Clean
-        edgy: ["Syne", "sans-serif"], // Creative & Expressive
-        futuristic: ["Urbanist", "sans-serif"], // High-tech Look
-        neon: ["Tilt Neon", "sans-serif"], // Vibrant & Energetic
-        readable: ["Lexend", "sans-serif"], // Optimized for UX
+        sans: ["Inter", ...fontFamily.sans],
       },
       keyframes: {
         shimmer: {

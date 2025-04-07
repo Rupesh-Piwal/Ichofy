@@ -12,16 +12,16 @@ const SectionGrid = ({ songs, title, isLoading }: SectionGridProps) => {
   if (isLoading) return <SectionGridSkeleton />;
 
   return (
-    <section className="font-body mb-12 px-4 py-6 bg-gradient-to-br from-zinc-900/30 to-zinc-800/50 rounded-xl shadow-xl">
+    <section className="font-body mb-12 md:px-4 py-6 bg-gradient-to-br from-zinc-900/30 to-zinc-800/50 rounded-xl shadow-xl">
       <h2 className="font-sleek text-2xl sm:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-800 to-pink-600 mb-6">
         {title}
       </h2>
 
-      <div className="font-sleek grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+      <div className="font-sleek grid grid-cols-2  md:grid-cols-4 gap-6">
         {songs.map((song) => (
           <div
             key={song._id}
-            className="font-sleek bg-zinc-800/40 rounded-lg overflow-hidden hover:bg-zinc-700/40 transition-all duration-300 group cursor-pointer transform hover:-translate-y-1 hover:shadow-2xl"
+            className="bg-zinc-800/40 rounded-lg overflow-hidden hover:bg-zinc-700/40 transition-all duration-300 group cursor-pointer transform hover:-translate-y-1 hover:shadow-2xl"
           >
             <div className="font-sleek relative">
               <div className="font-sleek aspect-square rounded-t-lg shadow-lg overflow-hidden">

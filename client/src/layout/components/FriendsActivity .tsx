@@ -25,7 +25,7 @@ const FriendsActivity = () => {
 
   return (
     <motion.div
-      className="bg-gradient-to-br from-[#B5179E]/10 to-[#7209B7]/10 rounded-lg overflow-hidden backdrop-blur-lg border border-white/10 shadow-lg h-full"
+      className="bg-gradient-to-br from-[#B5179E]/5 to-[#7209B7]/5 rounded-lg overflow-hidden backdrop-blur-lg border border-white/10 shadow-lg h-full"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}

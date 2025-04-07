@@ -15,7 +15,7 @@ const FeaturedSection = () => {
     );
 
   return (
-    <div className="font-sleek grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+    <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
       {featuredSongs.map((song) => (
         <div
           key={song._id}
@@ -27,10 +27,9 @@ const FeaturedSection = () => {
             hover:-translate-y-0.5
             cursor-pointer
             backdrop-blur-sm
-            h-20
+            h-20 rounded-[5px]
           "
         >
-
           <div className="absolute inset-0 bg-gradient-to-r from-[#B5179E]/5 to-[#7209B7]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
           <div className="relative w-20 h-20 flex-shrink-0 overflow-hidden">

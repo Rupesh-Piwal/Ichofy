@@ -13,7 +13,7 @@ const PlaylistList = () => {
   }, [fetchAlbums]);
 
   return (
-    <div className="flex-1 rounded-lg h-full bg-gradient-to-br from-[#B5179E]/5 to-[#7209B7]/5 p-4 shadow-lg">
+    <div className="flex-1 rounded-lg h-full bg-[#111111] p-4 shadow-lg">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center text-white px-2">
           <Library className="size-5 mr-2" />
@@ -29,7 +29,7 @@ const PlaylistList = () => {
               <Link
                 to={`/albums/${album._id}`}
                 key={album._id}
-                className="p-2 hover:bg-white/10 rounded-md flex items-center gap-3 group cursor-pointer transition-colors duration-200"
+                className="p-2 hover:bg-white/10 rounded-md flex items-center gap-3 group cursor-pointer transition-colors duration-200 bg-gradient-to-br from-[#B5179E]/5 to-[#7209B]/5"
               >
                 <img
                   src={album.imageUrl || "/placeholder.svg"}

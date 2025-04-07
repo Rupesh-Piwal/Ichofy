@@ -41,7 +41,7 @@ const MobileNavbar = () => {
       </div>
 
       <TooltipProvider>
-        <Dock className=" z-50 pointer-events-auto flex items-center px-2 bg-black/40 backdrop-blur-xl rounded-full shadow-[0_8px_32px_rgba(181,23,158,0.2)] border border-[#B5179E]/20 relative overflow-hidden">
+        <Dock className=" z-50 pointer-events-auto flex items-center px-2 bg-transparent backdrop-blur-xl rounded-full shadow-[0_8px_32px_rgba(181,23,158,0.2)] border border-[#B5179E]/20 relative overflow-hidden">
           {/* Animated gradient background */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#B5179E]/10 to-[#7209B7]/10 animate-gradient-slow" />
 
@@ -111,7 +111,7 @@ const MobileNavbar = () => {
                     whileTap={{ scale: 0.9 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
-                    <Link to="/messages">
+                    <Link to="/chat">
                       {" "}
                       {/* Link to messages page */}
                       <MessageCircle
